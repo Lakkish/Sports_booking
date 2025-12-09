@@ -1,12 +1,15 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const errorHandler = require("./middleware/errorHandler");
+
 const connectDB = require("./config/db");
 
 dotenv.config();
 connectDB(); // connect to MongoDB
 
 const app = express();
+app.use(errorHandler);
 app.use(cors());
 app.use(express.json());
 
