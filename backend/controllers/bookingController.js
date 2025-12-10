@@ -60,3 +60,21 @@ exports.getAllBookings = async (req, res) => {
   const bookings = await Booking.find().populate("court coach user");
   res.json(bookings);
 };
+
+exports.calculatePricePreview = async (req, res) => {
+  try {
+    const { court, coach, equipment, startTime, endTime } = req.body;
+
+    const pricing = await calculatePrice({
+      court,
+      coach,
+      equipment,
+      startTime,
+      endTime,
+    });
+
+    res.json(pricing);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to calculate price", error });
+  }
+};
