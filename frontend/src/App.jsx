@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/Home.jsx";
 import BookingPage from "./pages/BookingPage";
 import BookingHistory from "./pages/BookingHistory";
 import AdminDashboard from "./pages/AdminDashboard";
