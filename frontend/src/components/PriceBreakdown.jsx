@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/apiClient";
+import { Spinner } from "react-bootstrap";
 
 export default function PriceBreakdown({
   court,
@@ -9,25 +10,40 @@ export default function PriceBreakdown({
   onPrice,
 }) {
   const [price, setPrice] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!court || !selectedTime.start) return;
+    if (!court || !selectedTime.start || !selectedTime.end) return;
 
-    api
-      .post("/bookings/calc-price", {
-        court: court._id,
-        coach: coach ? coach._id : null,
-        equipment,
-        startTime: selectedTime.start,
-        endTime: selectedTime.end,
-      })
-      .then((res) => {
-        setPrice(res.data);
-        onPrice(res.data);
-      });
+    const fetchPrice = async () => {
+      try {
+        setLoading(true);
+
+        const response = await api.post("/bookings/calc-price", {
+          court: court._id,
+          coach: coach ? coach._id : null,
+          equipment: equipment,
+          startTime: selectedTime.start,
+          endTime: selectedTime.end,
+        });
+
+        setPrice(response.data);
+        onPrice(response.data); // update the context/global price
+      } catch (err) {
+        console.error("Price calculation failed:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPrice();
   }, [court, equipment, coach, selectedTime]);
 
-  if (!price) return <div>No price yet...</div>;
+  if (!court) return <div>Select a court to see pricing.</div>;
+  if (!selectedTime.start) return <div>Select a time slot to see pricing.</div>;
+  if (loading) return <Spinner animation="border" size="sm" />;
+
+  if (!price) return <div>No price calculated yet...</div>;
 
   return (
     <div>
