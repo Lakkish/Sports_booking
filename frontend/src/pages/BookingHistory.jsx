@@ -3,13 +3,21 @@ import { Card, Container, Row, Col, Spinner, Alert } from "react-bootstrap";
 import { getUserBookings } from "../services/bookingService";
 
 export default function BookingHistory() {
-  const TEST_USER_ID = "TEST_USER_ID"; // replace later with auth user
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    getUserBookings(TEST_USER_ID)
+    // Get logged in user
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user) {
+      setMessage("You must be logged in to view booking history.");
+      setLoading(false);
+      return;
+    }
+
+    getUserBookings(user.id)
       .then((res) => {
         setBookings(res.data);
         setLoading(false);
@@ -47,6 +55,7 @@ export default function BookingHistory() {
                   <strong>End:</strong>{" "}
                   {new Date(booking.endTime).toLocaleString()}
                 </p>
+
                 <p>
                   <strong>Status:</strong> {booking.status}
                 </p>

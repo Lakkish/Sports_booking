@@ -56,8 +56,10 @@ export default function BookingPage() {
       return;
     }
 
+    const loggedInUser = JSON.parse(localStorage.getItem("user"));
+
     const payload = {
-      user: "TEST_USER_ID",
+      user: loggedInUser.id,
       court: selectedCourt._id,
       coach: selectedCoach ? selectedCoach._id : null,
       equipment: selectedEquipment,
