@@ -19,6 +19,7 @@ app.use("/api/equipment", require("./routes/equipmentRoutes"));
 app.use("/api/coaches", require("./routes/coachRoutes"));
 app.use("/api/pricing-rules", require("./routes/pricingRuleRoutes"));
 app.use("/api/bookings", require("./routes/bookingRoutes"));
+app.use("/api/users", require("./routes/userRoutes"));
 
 // Default Route
 app.get("/", (req, res) => {
