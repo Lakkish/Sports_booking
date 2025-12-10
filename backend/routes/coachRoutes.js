@@ -5,9 +5,11 @@ const {
   createCoach,
   updateCoach,
 } = require("../controllers/coachController");
+const auth = require("../middleware/authMiddleware");
+const admin = require("../middleware/adminMiddleware");
 
 router.get("/", getCoaches);
-router.post("/", createCoach);
-router.put("/:id", updateCoach);
+router.post("/", auth, admin, createCoach);
+router.put("/:id", auth, admin, updateCoach);
 
 module.exports = router;

@@ -5,9 +5,11 @@ const {
   createEquipment,
   updateEquipment,
 } = require("../controllers/equipmentController");
+const auth = require("../middleware/authMiddleware");
+const admin = require("../middleware/adminMiddleware");
 
 router.get("/", getEquipment);
-router.post("/", createEquipment);
-router.put("/:id", updateEquipment);
+router.post("/", auth, admin, createEquipment);
+router.put("/:id", auth, admin, updateEquipment);
 
 module.exports = router;

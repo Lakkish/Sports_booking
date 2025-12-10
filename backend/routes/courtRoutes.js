@@ -6,10 +6,12 @@ const {
   updateCourt,
   toggleCourtStatus,
 } = require("../controllers/courtController");
+const auth = require("../middleware/authMiddleware");
+const admin = require("../middleware/adminMiddleware");
 
 router.get("/", getCourts);
-router.post("/", createCourt);
-router.put("/:id", updateCourt);
-router.patch("/:id/status", toggleCourtStatus);
+router.post("/", auth, admin, createCourt);
+router.put("/:id", auth, admin, updateCourt);
+router.patch("/:id/status", auth, admin, toggleCourtStatus);
 
 module.exports = router;

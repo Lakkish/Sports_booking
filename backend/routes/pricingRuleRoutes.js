@@ -6,10 +6,12 @@ const {
   updatePricingRule,
   togglePricingRule,
 } = require("../controllers/pricingRuleController");
+const auth = require("../middleware/authMiddleware");
+const admin = require("../middleware/adminMiddleware");
 
 router.get("/", getPricingRules);
-router.post("/", createPricingRule);
-router.put("/:id", updatePricingRule);
-router.patch("/:id/status", togglePricingRule);
+router.post("/", auth, admin, createPricingRule);
+router.put("/:id", auth, admin, updatePricingRule);
+router.patch("/:id/status", auth, admin, togglePricingRule);
 
 module.exports = router;
