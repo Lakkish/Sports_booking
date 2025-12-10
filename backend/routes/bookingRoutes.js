@@ -6,10 +6,11 @@ const {
   getAllBookings,
   calculatePricePreview,
 } = require("../controllers/bookingController");
+const auth = require("../middleware/authMiddleware");
 
-router.post("/", createBooking);
-router.get("/user/:id", getBookingsByUser);
-router.get("/", getAllBookings);
-router.post("/calc-price", calculatePricePreview);
+router.post("/", auth, createBooking);
+router.get("/user/:id", auth, getBookingsByUser);
+router.get("/", auth, getAllBookings);
+router.post("/calc-price", auth, calculatePricePreview);
 
 module.exports = router;
