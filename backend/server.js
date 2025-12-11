@@ -20,6 +20,7 @@ app.use("/api/coaches", require("./routes/coachRoutes"));
 app.use("/api/pricing-rules", require("./routes/pricingRuleRoutes"));
 app.use("/api/bookings", require("./routes/bookingRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
+app.use("/api/auth", require("./routes/authRoutes"));
 
 // Default Route
 app.get("/", (req, res) => {

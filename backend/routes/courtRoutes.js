@@ -6,6 +6,7 @@ const {
   updateCourt,
   toggleCourtStatus,
 } = require("../controllers/courtController");
+
 const auth = require("../middleware/authMiddleware");
 const admin = require("../middleware/adminMiddleware");
 
