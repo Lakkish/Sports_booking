@@ -131,7 +131,6 @@ ensuring full synchronization with server logic. The BookingPage provides a guid
 
 Overall, the system ensures strong modularity, clean separation between business logic and resource models, and a smooth user experience powered by real-time validation and pricing computation. 
 
----
 The architecture supports future enhancements like waitlisting, cancellation flows, concurrency handling, and advanced analytics.
 
-
+---
