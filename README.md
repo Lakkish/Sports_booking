@@ -110,6 +110,8 @@ JWT_SECRET = 21f65823ba29fb10c31317984deec4bc
 ### **4️⃣ Start Server**
 npm start
 
+---
+
 System Design Write-Up:
 
 This platform is designed with a modular, scalable architecture centered around clean separation of concerns. All core entities—Courts, Coaches, Equipment, Bookings, and Pricing Rules—are modeled as 
@@ -128,6 +130,8 @@ On the frontend, React Context is used for global state such as selected court, 
 ensuring full synchronization with server logic. The BookingPage provides a guided booking workflow, while the BookingHistory page shows past reservations retrieved from the authenticated user’s context.
 
 Overall, the system ensures strong modularity, clean separation between business logic and resource models, and a smooth user experience powered by real-time validation and pricing computation. 
+
+---
 The architecture supports future enhancements like waitlisting, cancellation flows, concurrency handling, and advanced analytics.
 
 
